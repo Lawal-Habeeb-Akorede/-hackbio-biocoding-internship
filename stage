@@ -17,3 +17,15 @@ print(a+b)
 print(a*b)
 print(b/a)
 print(a^b)
+# LECAL VARIABLE NAME 
+myvar <- "John"
+my_var <- "John"
+myVar <- "John"
+myvar2 <- "John"
+.myvar <- "John"
+
+# ILLEGAL VARIABLE NAMES 
+2myvar <- "John"
+my-var <- "John"
+,mg var <- " John"
+_my_var <- "John"
