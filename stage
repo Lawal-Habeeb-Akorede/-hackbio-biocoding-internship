@@ -21,6 +21,17 @@ print(a^b)
 myvar <- "John"
 my_var <- "John"
 myVar <- "John"
+#DATA TYPES WITH CLASS
+x<- 10.5 
+class (x)
+x <- 1000L
+class(x)
+x <- 9i + 5
+class(x)
+x <- "HackBio is exciting"
+class(x)
+x <- T
+class(x)
 myvar2 <- "John"
 .myvar <- "John"
 
