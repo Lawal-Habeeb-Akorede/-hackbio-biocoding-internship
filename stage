@@ -40,3 +40,22 @@ myvar2 <- "John"
 my-var <- "John"
 ,mg var <- " John"
 _my_var <- "John"
+#MATH TASK 
+abs(-4.7)
+sqrt(16)
+ceiling (1.4)
+floor(1.4)
+sin(30)
+cos(60)
+tan(45)
+log(10)
+log(10,10)
+exp(2)
+# logic with R 
+a <- 10 
+b <- 9 
+print(a>b)
+a <- 33 
+b <- 200 
+if (b>a){print ("b is greater than a")}
+if (b>a){print(paste(b,"is greater", a ))}
