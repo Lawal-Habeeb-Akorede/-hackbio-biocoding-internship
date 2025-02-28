@@ -59,3 +59,36 @@ a <- 33
 b <- 200 
 if (b>a){print ("b is greater than a")}
 if (b>a){print(paste(b,"is greater", a ))}
+TP53 <- 100 
+HEX <- 33
+if (TP53 > HEX){print(paste(TP53,"is greater than",HEX))
+}else if (TP53==HEX){print(paste(TP53,"is equal to", HEX))}
+
+A <- "purine"
+G <- "purine"
+T <- "pyrimidine"
+C <- "pyrimidine"
+
+if (A==G){
+    print(paste("its a", A))
+    }else if (T==C){
+        print(paste("its a", C))
+        }else {print("invalid DNA CODE")}
+
+
+expression_value <- 25
+low_threshold <- 10 
+high_threshold <- 50 
+
+if (expression_value <= low_threshold){
+    expression_value<-"low"
+    }else if (expression_value>= low_threshold & expression_value<=high_threshold){expression_value<- "medium"
+    }else if (expression_value>=high_threshold){ expression_value<-"high"}
+    print(paste("The expression level of a gene is", expression_value))
+ gene.exp <- c(33, 50, 89, 900, 678, 100)
+
+    for (TP53 in gene.exp){
+        if (TP53==100){
+            print("TP53 is equal to 100")}
+            else if(TP53>100){print("TP53 is greater than 100")}
+            }
