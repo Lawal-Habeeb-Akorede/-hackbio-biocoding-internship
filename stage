@@ -92,3 +92,17 @@ if (expression_value <= low_threshold){
             print("TP53 is equal to 100")}
             else if(TP53>100){print("TP53 is greater than 100")}
             }
+dna_sequences <- c("ATGCGCGGCCAATTTTGGCCGCGG")
+for (seq in dna_sequences){seq_length <- nchar(seq)}
+print(seq_length)
+for (seq in dna_sequences){
+    g_count <- sum(strsplit(seq, "")[[1]]=="G")}
+    print(g_count)
+
+for (seq in dna_sequences){
+    c_count <-  sum(strsplit(seq, "")[[1]]=="C")
+}
+print (c_count)
+for (seq in dna_sequences){
+    gc_content <- ((g_count+c_count)/seq_length)*100}
+print (paste("the GC content of the sequence is", gc_content,"%"))
