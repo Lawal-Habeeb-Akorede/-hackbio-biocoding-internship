@@ -1,7 +1,10 @@
-My Name is Lawal Akorede HABEEB. I’m a bachelor’s degree in Biochemistry from Kwara State University. I’m currently a research assistant at Molecular genetics and infectious diseases research lab.
+ Name <-  "Lawal_Akorede_HABEEB". 
+Slack_Username <- "Lawal"
+email <- "lawalhabeeb909@gmail.com"
+Hobby <- I love research_And I love to learn new things in my field
+I’m a bachelor’s degree in Biochemistry from Kwara State University. I’m currently a research assistant at Molecular genetics and infectious diseases research lab.
 I just got admitted for my MSc program at NYU Tandon school of Engineering USA  in Biomedical Engineering.
-I love research
-And I love to learn new things in my field
+
 Connect on linkdin https://www.linkedin.com/in/lawal-habeeb-akorede-3b4101291?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app
 
 print("Hello HackBio")
