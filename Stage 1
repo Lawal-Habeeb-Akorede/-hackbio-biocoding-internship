@@ -1,0 +1,66 @@
+WRITE A CODE TO CREATE A FUNCTION FOR TRANSLATING DNA TO PROTEIN. 
+
+codon_db <- c("UUU"="Phe", "UUC"= "Phe", "UUA"= "Leu", "UUG"= "Leu")
+test_cd <- c("UUUUUAUUAUUCUUAUUUUUCUUGUUGUUA")
+translator <- function(test_cd){
+  
+  split_seq <- strsplit(test_cd, "")[[1]]
+  #print(split_seq)
+  
+  codon_position <- seq( 1, length(split_seq), 3)
+  #print(codon_position)
+  ribosomal_output <- c()
+  for (i in codon_position){
+    curr_codon <- split_seq[i:(i+2)]
+    curr_codon <- paste0(curr_codon[1],curr_codon[2],curr_codon[3])
+    
+                         print(curr_codon)
+                         
+    
+    ribosomal_output <- c(ribosomal_output, codon_db[curr_codon])
+            }
+  return(ribosomal_output)
+  
+  
+  
+  }
+translator("UUA" )
+
+
+population_maker <- function (k=2, x_mid =5, x){
+  solution <- 1/ (1+ exp(-k *(x - x_mid)))
+  return(solution)
+}
+print(population_maker( , , x=2))
+
+od_600 <- c()
+habibi <-c(0:24)
+for (i in habibi){
+  curr_od <- population_maker(k= 0.25, x_mid= 10, x=i)
+  od_600 <- c(od_600, curr_od)
+}
+print(od_600)
+print(length(habibi))
+plot(x=habibi, y= od_600)
+importmath
+
+#IMPORT MATH
+def population_maker(x , k = 2, x_mid = 5):
+  
+  {solution = 1/(1 + math.exp(-k*(x-x_mid)))}
+
+return (solution)
+
+#print(population_maker(k = 2, x_mid = 5, x = 10))
+
+od_600 = []
+
+for i in range(0,24):
+  
+  od_600.append(population_maker(x = i, k = 0.5, x_mid = 10))
+
+print(od_600)
+
+import seaborn as sns
+
+sns.lineplot(x = range(0,24), y = od_600)
