@@ -24,7 +24,7 @@ translator <- function(test_cd){
   
   
   }
-translator("UUA" )
+translator(test_codon )
 
 
 population_maker <- function (k=2, x_mid =5, x){
