@@ -14,16 +14,14 @@ translator <- function(test_cd){
     curr_codon <- split_seq[i:(i+2)]
     curr_codon <- paste0(curr_codon[1],curr_codon[2],curr_codon[3])
     
-                         print(curr_codon)
-                         
-    
+       print(curr_codon)       
     ribosomal_output <- c(ribosomal_output, codon_db[curr_codon])
             }
-  return(ribosomal_output)
-  
-
+  return(ribosomal_output
   }
 translator(test_codon )
+
+
 
 #LOGISTIC GROWTH CURVE
 
@@ -45,14 +43,12 @@ plot(x=habibi, y= od_600)
 
 
 
-# calculate the 80% of time to research max growth ccurve using carrier capacity
+# WRITE A FUNCTION TO DETERMINE THE TIME TO REACH 80% GROWTH RATE USING CARRING CAPACITY.
 
-pop_time <-function(A= 4, k= 0.08, t, L){
-  solute <- L / (1+ A * exp(-k * t))
-  return(solute)
-}
-pop_time( , , 10,4)
-
+time <- function (k= 4, p_i = 50, p_f = 1* 10^9, r = x){
+  solution1 <- (k * log(p_f/p_i))/ log(1 +r)
+return(solution1)}
+time(r= 0.08)
 
 
 # calculate the hamming distance of slack username and twitter handle 
