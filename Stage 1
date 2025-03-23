@@ -71,3 +71,23 @@ pop_time <-function(A= 4, k= 0.08, t, L){
   return(solute)
 }
 pop_time( , , 10,4)
+
+# calculate the hamming distance of slack username and twitter handle 
+    
+slack_username <- "lawalhabeebakor" 
+twitterhandle <-"alchemistakored"
+nchar(slack_username)
+nchar(twitterhandle)
+
+hamming_distance <- function(slack_username, twitterhandle){
+  distance <- 0 
+  for (i in 1:nchar(twitterhandle)){
+    if (substr(slack_username, i,i)!= substr(twitterhandle, i, i)){
+      distance <- distance + 1
+    }
+    
+  }
+  return(distance)
+}
+hamming_distance(slack_username, twitterhandle )
+  
