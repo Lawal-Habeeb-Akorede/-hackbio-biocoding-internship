@@ -21,11 +21,11 @@ translator <- function(test_cd){
             }
   return(ribosomal_output)
   
-  
-  
+
   }
 translator(test_codon )
 
+#LOGISTIC GROWTH CURVE
 
 population_maker <- function (k=2, x_mid =5, x){
   solution <- 1/ (1+ exp(-k *(x - x_mid)))
@@ -42,28 +42,9 @@ for (i in habibi){
 print(od_600)
 print(length(habibi))
 plot(x=habibi, y= od_600)
-importmath
 
-#IMPORT MATH
-def population_maker(x , k = 2, x_mid = 5):
-  
-  {solution = 1/(1 + math.exp(-k*(x-x_mid)))}
 
-return (solution)
 
-#print(population_maker(k = 2, x_mid = 5, x = 10))
-
-od_600 = []
-
-for i in range(0,24):
-  
-  od_600.append(population_maker(x = i, k = 0.5, x_mid = 10))
-
-print(od_600)
-
-import seaborn as sns
-
-sns.lineplot(x = range(0,24), y = od_600)
 # calculate the 80% of time to research max growth ccurve using carrier capacity
 
 pop_time <-function(A= 4, k= 0.08, t, L){
@@ -71,6 +52,8 @@ pop_time <-function(A= 4, k= 0.08, t, L){
   return(solute)
 }
 pop_time( , , 10,4)
+
+
 
 # calculate the hamming distance of slack username and twitter handle 
     
