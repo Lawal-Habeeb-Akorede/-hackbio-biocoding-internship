@@ -64,3 +64,10 @@ print(od_600)
 import seaborn as sns
 
 sns.lineplot(x = range(0,24), y = od_600)
+# calculate the 80% of time to research max growth ccurve using carrier capacity
+
+pop_time <-function(A= 4, k= 0.08, t, L){
+  solute <- L / (1+ A * exp(-k * t))
+  return(solute)
+}
+pop_time( , , 10,4)
