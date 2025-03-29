@@ -1,0 +1,84 @@
+# 2.1 MICROBIOLOGY TASK 
+mydata_microb <- read.csv("https://raw.githubusercontent.com/HackBio-Internship/2025_project_collection/refs/heads/main/Python/Dataset/mcgc.tsv",header = T,sep="\t")
+
+
+print(mydata_microb)
+
+sort_data <- data.frame(
+  strain_1_rep1_WT = c(mydata_microb$A1, mydata_microb$B1, mydata_microb$C1),
+  strain_1_rep2_WT = c(mydata_microb$A3, mydata_microb$B3, mydata_microb$C3),
+  strain_1_rep1_mut = c(mydata_microb$A2, mydata_microb$B2, mydata_microb$C2),
+  strain_1_rep2_mut = c(mydata_microb$A4, mydata_microb$B4, mydata_microb$C4),
+  strain_2_rep1_WT = c(mydata_microb$A5,mydata_microb$B5, mydata_microb$C5), 
+  strain_2_rep2_WT = c(mydata_microb$A7, mydata_microb$B7, mydata_microb$C7),
+  strain_2_rep1_mut = c(mydata_microb$A6, mydata_microb$B6, mydata_microb$C6),
+  strain_2_rep2_mut = c(mydata_microb$A8, mydata_microb$B8, mydata_microb$C8),
+  strain_3_rep1_WT = c(mydata_microb$A9, mydata_microb$B9, mydata_microb$C9),
+  strain_3_rep2_WT = c(mydata_microb$A11, mydata_microb$B11, mydata_microb$C11),
+  strain_3_rep1_mut = c(mydata_microb$A10, mydata_microb$B10, mydata_microb$C10),
+  strain_3_rep2_mut = c(mydata_microb$A12, mydata_microb$B12, mydata_microb$C12), 
+  time_growth = c(mydata_microb$time[1:97],mydata_microb$time[1:97],mydata_microb$time[1:97] )
+)
+
+
+
+# Lets find the means of the two technical replicate by of each strains by adding new column
+library(dplyr)
+sort_data1 <-sort_data %>%
+  mutate(mean_strain_1_WT= (strain_1_rep1_WT*strain_1_rep2_WT)/2)
+       
+sort_data2 <-sort_data1 %>%
+  mutate(mean_strain_1_mut= (strain_1_rep1_mut*strain_1_rep2_mut)/2)
+
+sort_data3 <-sort_data2 %>%
+  mutate(mean_strain_2_WT= (strain_2_rep1_WT*strain_2_rep2_WT)/2)
+
+sort_data4 <-sort_data3 %>%
+  mutate(mean_strain_2_mut= (strain_2_rep1_mut*strain_2_rep2_mut)/2)
+
+sort_data5 <-sort_data4 %>%
+  mutate(mean_strain_3_WT= (strain_3_rep1_WT*strain_3_rep2_WT)/2)
+
+sort_data6 <-sort_data5 %>%
+  mutate(mean_strain_3_mut= (strain_3_rep1_mut*strain_3_rep2_mut)/2)
+
+
+#  now let select the columns of interest from our big dataset 
+
+selected_sort_data <- select(sort_data6, time_growth,mean_strain_1_WT,mean_strain_1_mut, mean_strain_2_WT, mean_strain_2_mut, mean_strain_3_WT,mean_strain_3_mut)
+
+
+options(repr.plot.width = 10, repr.plot.height = 8)
+
+
+
+# NOw lets proceed to plotting 
+#PLOT 1 Mean strain1 WT vs KO 
+
+plot(selected_sort_data$time_growth,selected_sort_data$mean_strain_1_WT, type = "l", col = "blue",
+     xlab = "Time (mins)", ylab = "OD600", main = "Strain_1_ WT vs KO", lty = 1, ylim = c(0, max(selected_sort_data[,-1], na.rm = TRUE)))
+lines(selected_sort_data$time_growth, selected_sort_data$mean_strain_1_mut, col = "red", lty = 2)
+
+
+legend("topleft", legend = c("WT", "KO"), col = c("blue", "red"), lty = c(1, 2), cex = 0.9)
+
+
+#PLOT 2 mean strain 2 WT vs KO 
+plot(selected_sort_data$time_growth,selected_sort_data$mean_strain_2_WT, type = "l", col = "blue",
+     xlab = "Time (mins)", ylab = "OD600", main = "Strain_2_ WT vs KO", lty = 1, ylim = c(0, max(selected_sort_data[,-1], na.rm = TRUE)))
+lines(selected_sort_data$time_growth, selected_sort_data$mean_strain_2_mut, col = "red", lty = 2)
+
+
+legend("topleft", legend = c("WT", "KO"), col = c("blue", "red"), lty = c(1, 2), cex = 0.9)
+
+
+# PLOT 3 
+# MEAN Strain 3 WT Vs KO 
+plot(selected_sort_data$time_growth,selected_sort_data$mean_strain_3_WT, type = "l", col = "blue",
+     xlab = "Time (mins)", ylab = "OD600", main = "Strain_3_ WT vs KO", lty = 1, ylim = c(0, max(selected_sort_data[,-1], na.rm = TRUE)))
+lines(selected_sort_data$time_growth, selected_sort_data$mean_strain_3_mut, col = "red", lty = 2)
+
+
+legend("topleft", legend = c("WT", "KO"), col = c("blue", "red"), lty = c(1, 2), cex = 0.9)
+
+
