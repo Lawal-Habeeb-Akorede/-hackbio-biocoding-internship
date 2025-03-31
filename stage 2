@@ -82,3 +82,82 @@ lines(selected_sort_data$time_growth, selected_sort_data$mean_strain_3_mut, col 
 legend("topleft", legend = c("WT", "KO"), col = c("blue", "red"), lty = c(1, 2), cex = 0.9)
 
 
+
+
+carrying_capacity<-function(final_od,time_points,od_values) {
+  target_od <- final_od*0.8 # Calculates 80% of the final OD (representing the carrying capacity)
+  time_for_capacity<-time_points[min(which(od_values>=target_od))] # Identify the point at which OD value reaches or exceeds the target OD
+}
+
+
+for (i in 1:ncol(sort_data)) {  
+  final_od<-max(sort_data[[i]])
+  result<-carrying_capacity(final_od,sort_data$time_growth,sort_data[[i]])
+  print(paste("Time it takes to reach the carrying capacity for",colnames(sort_data)[i],"is",result,"minutes"))
+}
+
+
+# CREATE A SCATTER PLOT AND BOX PLOT
+
+
+# Create a dataframe 
+
+capacity_df <- data.frame(Strain = colnames(sort_data)[-13]) 
+
+
+# Define empty column named OD_capacity
+
+capacity_df$OD_capacity <- c()
+
+for (i in 1:12) {  # Skip the time column
+  final_od <- max(sort_data[[i]])
+  result <- carrying_capacity(final_od, sort_data$time_growth, sort_data[[i]])
+  capacity_df$OD_capacity[i] <- result  # Store the result
+}
+print(capacity_df)
+
+
+library(dplyr)
+wt_strains<-c("Strain_1_Rep_1_wt","Strain_1_Rep_2_wt",
+              "Strain_2_Rep_1_wt","Strain_1_Rep_2_wt",
+              "Strain_3_Rep_1_wt","Strain_3_Rep_2_wt")
+
+ko_strains<-c("Strain_1_Rep_1_mutant","Strain_1_Rep_2_mutant",
+              "Strain_2_Rep_1_mutant","Strain_1_Rep_2_mutant",
+              "Strain_3_Rep_1_mutant","Strain_3_Rep_2_mutant")
+
+
+# Define the strain names for categorization
+wt_strains_capacity <- capacity_df[c(1,2,5,6,9,10), "OD_capacity"]
+
+  
+print(wt_strains_capacity)
+
+ko_strains_capacity<-capacity_df[c(3,4,7,8,11,12), "OD_capacity"]
+
+print(ko_strains_capacity)
+
+# Perform t-test
+
+t_test_result<-t.test(wt_strains_capacity,ko_strains_capacity)
+print(t_test_result)
+
+t_test_result$statistic # t-value
+t_test_result$parameter # df
+t_test_result$p.value #statistical significance
+t_test_result$estimate #means of two groups (wild-type vs knock-out strains)
+t_test_result$conf.int # confidence interval
+
+
+wt_mean<-t_test_result$estimate[1] # wild-type mean
+ko_mean<-t_test_result$estimate[2] # knock-out mean
+
+
+# Create a scatter plot
+
+plot(wt_strains_capacity,ko_strains_capacity, 
+     main="Wild-type vs knock-out strains carrying capacity",
+     xlab="Strain", 
+     ylab="Time to reach the carrying capacity (mins)", 
+     col="blue", 
+     pch=19)
