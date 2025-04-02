@@ -161,3 +161,17 @@ plot(wt_strains_capacity,ko_strains_capacity,
      ylab="Time to reach the carrying capacity (mins)", 
      col="blue", 
      pch=19)
+
+boxplot_data<-list(wt_strains_capacity, ko_strains_capacity)
+
+boxplot(boxplot_data,
+        xlab="Strain",
+        ylab="Time to reach the carrying capacity (mins)",
+        main="Wild type vs knock-out strains carrying capacity",
+        notch=FALSE # in case you'd like to add the median
+        
+)
+
+# CONCLUSION 
+# their is a startistical difference between carrying capacity of WT and Mut 
+# The null hypothesis would be rejected. 
