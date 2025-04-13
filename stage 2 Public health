@@ -139,20 +139,22 @@ grid.arrange(plot5,plot6,plot7, ncol=2, nrow=2) #Represent all charts in a singl
 
 #t-test between Age and Gender
 #Use  Welch's Two sample t-test to conduct t-tests between numerical and categorical columns
-Age_ttest <- t.test(Age~Gender,data = nhanes_data,subset =Age !=0 & Gender !="0")
+Age_ttest <- t.test(Age~Gender,data = public_health,subset =Age !=0 & Gender !="0")
 print(Age_test)
 
 #t-test between BMI and Diabetes
-BMI_ttest <- t.test(BMI~Diabetes,data = nhanes_data,subset =BMI !=0 & Diabetes !="0")
+BMI_ttest <- t.test(BMI~Diabetes,data = public_health,subset =BMI !=0 & Diabetes !="0")
 print(BMI_ttest)
 
 #t-test between Alcohol Year and Relationship Status
-AlcoholYear_ttest <- t.test(AlcoholYear~RelationshipStatus,data = nhanes_data,subset =AlcoholYear !=0 & RelationshipStatus !="0")
+AlcoholYear_ttest <- t.test(AlcoholYear~RelationshipStatus,data = public_health,subset =AlcoholYear !=0 & RelationshipStatus !="0")
 print(AlcoholYear_ttest)
 
 #Results of the t-tests
 #Based on the p-value for the Age and Gender t-test, there is no statistically significant difference in age between males and females
 #The p-value for the BMI and Diabetes t-test suggests a major difference in BMI between people with diabetes and otherwise
 #The p-value for the Alcohol year and Relationship status indicates a difference in alcohol consumption  between single and committed people
+
+
 
 
