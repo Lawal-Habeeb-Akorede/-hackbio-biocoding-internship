@@ -1,0 +1,104 @@
+# TASK ANATOMY AND PHYSIOLOGY [CANCER] 
+#Anatomy and Physiology [Cancer]
+#Look at this dataset
+#How do you distinguish benign from malignant datasets?
+#Using PCA and K-Mean clustering, classify and cluster the patients.
+#Do you think there are other subclasses within the dataset?
+
+
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(caret)
+library(tidyr)
+
+
+
+wdbs_url <- "https://raw.githubusercontent.com/PacktPublishing/Machine-Learning-in-Biotechnology-and-Life-Sciences/refs/heads/main/datasets/dataset_wisc_sd.csv"
+wdbs <-read.csv(wdbs_url, header = TRUE)
+View(wdbs)
+
+
+wdbs$diagnosis <-as.factor(wdbs$diagnosis)
+wdbs <- wdbs[, -1]
+
+#CHECK OUT THE MISSING VALUES 
+
+wdbs[is.na(wdbs)] <- 0
+
+
+sum(is.na(wdbs))
+#  FIND AND REMOVE HIGLY CORRELATED PREDICTOR 
+install.packages("corrr")
+library(corrr)
+
+wdbs_corr <- correlate(wdbs)
+wdbs_corr <- stretch(wdbs_corr)
+wdbs_corr <- filter(wdbs_corr, abs(r) > 0.9)
+
+
+View(wdbs_corr)
+
+
+wdbs_scale <- scale(wdbs)
+ sapply(wdbs, class)
+ wdbs$concave.points_worst <- as.numeric(wdbs$concave.points_worst)
+ sapply(wdbs, class)
+
+#perform pca
+preproc_pca_wdbs <- prcomp(wdbs[, -1], scale. = TRUE, center = TRUE)
+#  CHECK IF THE CLASS OF THE DATASET ARE ALL NUMERIC
+all(sapply(wdbs, is.numeric))
+# REMOVE ALL MISSING VALUE 
+
+ wdbs <- na.omit(wdbs)
+# PERFORM THE PCA
+ preproc_pca_wdbs <- prcomp(wdbs[, -1], scale. = TRUE, center = TRUE)
+
+ # lets calculate proportion of variance
+ 
+ pca_wdbs_var <- preproc_pca_wdbs$sdev^2
+pve_wdbs <- pca_wdbs_var/ sum(pca_wdbs_var)
+
+cum_pve <- cumsum(pve_wdbs)
+
+
+# lest visualize the cummulative varience 
+
+pve_table <- tibble(comp= 
+                      seq(1:ncol(wdbs[, -1])), pve_wdbs, cum_pve)
+ggplot(pve_table, aes(x=comp, y= cum_pve)) +
+  geom_point() +
+  geom_abline(intercept = 0.95, color= "red", slope = 0)+
+  labs(x= "Number of components", y= "Cummulative Varience")
+
+
+# K_ MEAN CLUSTERING
+
+
+pca_wdbs <- data.frame(preproc_pca_wdbs$x[, 1:2])
+
+
+
+# Lets perform K mean clustering
+
+set.seed(123)
+kmeans<- kmeans(pca_wdbs, centers = 2)
+
+
+# Visualize Clusters 
+
+pca_wdbs$cluster <- factor(kmeans$cluster)
+
+
+ggplot(pca_wdbs, aes(x= PC1, y= PC2, color= cluster))+
+  geom_point()+
+  labs(x= "Principal Component 1 ", y= " Principal Component 2")
+
+
+#  Lets Explore potential subclass UING HIERARCHICAL CLUSTERING
+
+hclust <- hclust(dist(pca_wdbs[, 1:2]))
+
+plot(hclust)
